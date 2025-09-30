@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Ticket Management System</title>
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+  <header class="app-header">
+    <h1>🎟️ Ticket Management System</h1>
+    <div class="controls">
+      <input id="search" type="search" placeholder="Search title, id, assignee, tags..."/>
+      <select id="statusFilter">
+        <option value="ALL">All Statuses</option>
+        <option value="OPEN">Open</option>
+        <option value="IN_PROGRESS">In Progress</option>
+        <option value="RESOLVED">Resolved</option>
+        <option value="CLOSED">Closed</option>
+      </select>
+      <select id="sortBy">
+        <option value="createdAt_desc">Newest</option>
+        <option value="createdAt_asc">Oldest</option>
+        <option value="priority_desc">Priority ↓</option>
+        <option value="priority_asc">Priority ↑</option>
+      </select>
+      <button id="newTicketBtn" class="primary">+ New Ticket</button>
+    </div>
+  </header>
+
+  <main>
+    <section id="stats" class="stats">
+      <div class="stat"><span id="countAll">0</span><label>All</label></div>
+      <div class="stat"><span id="countOpen">0</span><label>Open</label></div>
+      <div class="stat"><span id="countInProgress">0</span><label>In Progress</label></div>
+      <div class="stat"><span id="countResolved">0</span><label>Resolved</label></div>
+      <div class="stat"><span id="countClosed">0</span><label>Closed</label></div>
+    </section>
+
+    <section id="tickets" class="grid"></section>
+  </main>
+
+  <!-- Modal -->
+  <dialog id="ticketModal">
+    <form method="dialog" id="ticketForm">
+      <h2 id="modalTitle">New Ticket</h2>
+      <div class="form-grid">
+        <label>Title* <input id="title" required maxlength="120" /></label>
+        <label>Description <textarea id="description" rows="4" maxlength="2000"></textarea></label>
+        <label>Assignee <input id="assignee" maxlength="80"/></label>
+        <label>Priority
+          <select id="priority">
+            <option value="3">Low</option>
+            <option value="2">Medium</option>
+            <option value="1">High</option>
+            <option value="0">Critical</option>
+          </select>
+        </label>
+        <label>Tags (comma-separated) <input id="tags" placeholder="frontend, bug"/></label>
+        <label>Status
+          <select id="status">
+            <option value="OPEN">Open</option>
+            <option value="IN_PROGRESS">In Progress</option>
+            <option value="RESOLVED">Resolved</option>
+            <option value="CLOSED">Closed</option>
+          </select>
+        </label>
+      </div>
+      <menu>
+        <button value="cancel">Cancel</button>
+        <button id="saveBtn" class="primary" value="default">Save</button>
+      </menu>
+      <input type="hidden" id="ticketId"/>
+    </form>
+  </dialog>
+
+  <template id="ticketTpl">
+    <article class="card">
+      <header class="card-header">
+        <span class="badge id"></span>
+        <span class="badge status"></span>
+        <span class="badge priority"></span>
+      </header>
+      <h3 class="title"></h3>
+      <p class="desc"></p>
+      <div class="meta">
+        <span class="assignee"></span>
+        <span class="date"></span>
+      </div>
+      <div class="tags"></div>
+      <footer class="actions">
+        <button class="edit">Edit</button>
+        <button class="resolve">Resolve</button>
+        <button class="close danger">Close</button>
+        <button class="del ghost">Delete</button>
+      </footer>
+    </article>
+  </template>
+
+  <script src="app.js"></script>
+</body>
+</html>
