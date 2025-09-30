@@ -32,6 +32,3 @@ A lightweight, front-end **SaaS-style** ticket manager built with **JS** and **l
 This project is designed so `save/load` can be replaced with API calls (REST/GraphQL).  
 - Replace `load()`/`save()` with `fetch('/api/tickets')` logic.  
 - Keep the rest of the UI code as is.
-
-## 📜 License
-MIT
